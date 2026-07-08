@@ -12,6 +12,24 @@
 
 ---
 
+## ❤️Sponsor
+
+> [想出现在这里？](mailto:wismyzhizi2018@gmail.com)
+
+---
+
+Kimi K2.6 是 Moonshot AI 开源的原生多模态 Agent 模型，专为长程编程、编程驱动设计和群组任务编排而生。支持前端、DevOps、性能优化、全栈工程等复杂端到端工作流。 [点击注册](https://platform.moonshot.cn/console?aff=cc-code)
+
+---
+
+[![Xiaomi MiMo](https://github.com/cc-claws/cc-code/raw/main/assets/partners/logos/mimo.png)](https://platform.xiaomimimo.com?ref=JBEYTF)
+小米顶尖模型 MiMo V2.5，通过邀请码注册：双方各得 ¥10 API 体验金 + 首单 9 折。邀请码：JBEYTF。 [点击注册](https://platform.xiaomimimo.com?ref=JBEYTF)（注册后自动填入 · 体验金 40 天有效）
+
+[![GLM](https://github.com/cc-claws/cc-code/raw/main/assets/partners/logos/glm.png)](https://www.bigmodel.cn/glm-coding?ic=MR7BVITFAY)
+智谱 GLM Coding Plan — 国内顶流编程大模型，20+ 主流工具全适配，性价比拉满。 [立即参与「拼好模」](https://www.bigmodel.cn/glm-coding?ic=MR7BVITFAY)
+
+---
+
 ## 为什么选 codebuddy-hud？
 
 | 对比项 | claude-hud | t-code-agent-plugins | codebuddy-hud |
