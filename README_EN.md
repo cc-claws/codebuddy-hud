@@ -24,10 +24,10 @@ Kimi K2.6 is an open-source native multimodal Agent model by Moonshot AI, design
 
 ---
 
-[![Xiaomi MiMo](https://github.com/cc-claws/cc-code/raw/main/assets/partners/logos/mimo.png)](https://platform.xiaomimimo.com?ref=JBEYTF)
+[![Xiaomi MiMo](assets/partners/logos/mimo.png)](https://platform.xiaomimimo.com?ref=JBEYTF)
 Xiaomi's top model MiMo V2.5 — register with invite code: both parties get ¥10 API credit + 10% off first order. Invite code: JBEYTF. [Register](https://platform.xiaomimimo.com?ref=JBEYTF)（auto-filled · credit valid 40 days）
 
-[![GLM](https://github.com/cc-claws/cc-code/raw/main/assets/partners/logos/glm.png)](https://www.bigmodel.cn/glm-coding?ic=MR7BVITFAY)
+[![GLM](assets/partners/logos/glm.png)](https://www.bigmodel.cn/glm-coding?ic=MR7BVITFAY)
 Zhipu GLM Coding Plan — China's top coding LLM, 20+ mainstream tools supported, unbeatable value. [Join now](https://www.bigmodel.cn/glm-coding?ic=MR7BVITFAY)
 
 ---
