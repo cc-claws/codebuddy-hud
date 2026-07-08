@@ -1,5 +1,7 @@
 # codebuddy-hud
 
+[English](README_EN.md) | 简体中文
+
 **CodeBuddy Code 的 HUD 状态栏 — 实时展示模型、上下文、Git、工具统计、Token 用量**
 
 兼容 CodeBuddy Code 和 Claude Code 双 transcript 格式，配色对齐 claude-hud。
