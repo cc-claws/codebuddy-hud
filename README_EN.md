@@ -20,6 +20,7 @@ Compatible with both CodeBuddy Code and Claude Code transcript formats, colors a
 
 ---
 
+[![Kimi K2.6](assets/partners/logos/kimi.png)](https://platform.moonshot.cn/console?aff=cc-code)
 Kimi K2.6 is an open-source native multimodal Agent model by Moonshot AI, designed for long-horizon programming, design-driven coding, and group task orchestration. Supports frontend, DevOps, performance optimization, full-stack engineering. [Register](https://platform.moonshot.cn/console?aff=cc-code)
 
 ---

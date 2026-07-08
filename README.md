@@ -20,6 +20,7 @@
 
 ---
 
+[![Kimi K2.6](assets/partners/logos/kimi.png)](https://platform.moonshot.cn/console?aff=cc-code)
 Kimi K2.6 是 Moonshot AI 开源的原生多模态 Agent 模型，专为长程编程、编程驱动设计和群组任务编排而生。支持前端、DevOps、性能优化、全栈工程等复杂端到端工作流。 [点击注册](https://platform.moonshot.cn/console?aff=cc-code)
 
 ---
