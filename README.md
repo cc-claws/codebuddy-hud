@@ -1,47 +1,76 @@
 # codebuddy-hud
 
-A HUD-style status line for [CodeBuddy Code](https://cnb.cool/codebuddy/codebuddy-code), showing model, context usage, project, git status, tool stats, token usage, session duration, and output speed.
+**CodeBuddy Code 的 HUD 状态栏 — 实时展示模型、上下文、Git、工具统计、Token 用量**
 
-Based on [t-code-agent-plugins](https://github.com/tyanxie/t-code-agent-plugins) by tyanxie and inspired by [claude-hud](https://github.com/jarrodwatts/claude-hud) by jarrodwatts.
+兼容 CodeBuddy Code 和 Claude Code 双 transcript 格式，配色对齐 claude-hud。
 
-## Features
+```
+/plugin marketplace add cc-claws/codebuddy-hud
+```
 
-- **Model + Context Bar** — Current model name with context window usage progress bar (green/yellow/red)
-- **Project + Git** — Project path with git branch and dirty status
-- **Tool Stats** — Cumulative tool call counts for the entire session (`✓ Bash ×102 | ✓ Read ×79 | ...`)
-- **Token Usage** — Session token stats (`tok: 841k (in: 12k, out: 5k)`)
-- **Session Duration** — Time since session start (`⏱️ 14h 43m`)
-- **Output Speed** — Tokens per second (`out: 170.4 tok/s`)
-- **Running Tools** — Live spinner for in-progress tool calls (`◐ Bash`)
-- **Compact Layout** — Two-line display: session info + tool stats
-- **Fully Configurable** — All display elements, colors, and thresholds customizable
+[为什么选 codebuddy-hud](#为什么选-codebuddy-hud) · [核心能力](#核心能力) · [安装](#安装) · [配置](#配置) · [致谢](#致谢)
 
-## Screenshot
+---
+
+## 为什么选 codebuddy-hud？
+
+| 对比项 | claude-hud | t-code-agent-plugins | codebuddy-hud |
+|---|---|---|---|
+| CodeBuddy Code 格式 | ❌ 不支持 | ❌ 不支持 | ✅ 原生支持 `function_call_result` |
+| Claude Code 格式 | ✅ 支持 | ✅ 支持 | ✅ 支持 `tool_use` |
+| 工具统计 | 仅最近 20 个 | 仅最近 20 个 | ✅ 整个 session 累计 |
+| 启动速度 | ~0.35s | ~1.1s | ✅ ~0.2s |
+| 配色对齐 claude-hud | — | ❌ | ✅ 完全对齐 |
+| stdin 超时 | 250ms | 1000ms | ✅ 无超时（`for await`） |
+| Git 命令 | 串行 | 串行 | ✅ 并行（`Promise.all`） |
+| 缓存 | 无 | 只写不读（bug） | ✅ 读写完整 |
+| 测试 | 131 通过 | 0 个测试（脚本 bug） | ✅ 131 通过 |
+
+---
+
+## 核心能力
+
+| 能力 | 说明 |
+|---|---|
+| **双格式兼容** | 同时支持 CodeBuddy Code `function_call_result` 和 Claude Code `tool_use` transcript |
+| **实时工具统计** | 整个 session 累计工具调用次数（`✓ Bash ×102 \| ✓ Read ×79 \| ...`） |
+| **运行中工具** | 实时显示正在执行的工具（`◐ Bash`） |
+| **Token 用量** | 会话 token 统计（`tok: 841k (in: 12k, out: 5k)`） |
+| **输出速度** | 每秒输出 token 数（`out: 170.4 tok/s`） |
+| **会话时长** | 会话持续时间（`⏱️ 14h 43m`） |
+| **上下文进度条** | 颜色随使用率变化（green < 70% < yellow < 85% < red） |
+| **Git 状态** | 分支名 + 脏标记（`git:(main*)`） |
+| **全配置化** | 所有显示元素、颜色、阈值均可自定义 |
+| **Compact 双行** | 第一行会话信息，第二行工具统计 |
+
+### 效果预览
 
 ```
 [hy3-preview] █░░░░░░░░░ 5% | nt_order git:(main*) | tok: 841k (in: 12k, out: 5k) | ⏱️  14h 43m | out: 166.7 tok/s
 ✓ Bash ×102 | ✓ Read ×79 | ✓ Edit ×56 | ✓ Grep ×4 | +4 more
 ```
 
-## Installation
+---
 
-### Via Plugin Marketplace
+## 安装
+
+### 插件市场（推荐）
 
 ```bash
-/plugin marketplace add your-username/codebuddy-hud
+/plugin marketplace add cc-claws/codebuddy-hud
 /plugin install codebuddy-hud@codebuddy-hud
 ```
 
-### Manual Installation
+### 手动安装
 
 ```bash
-git clone https://github.com/your-username/codebuddy-hud.git ~/.codebuddy-hud
+git clone https://github.com/cc-claws/codebuddy-hud.git ~/.codebuddy-hud
 cd ~/.codebuddy-hud
 npm install
 npm run build
 ```
 
-Add to `~/.codebuddy/settings.json`:
+在 `~/.codebuddy/settings.json` 中添加：
 
 ```json
 {
@@ -53,11 +82,13 @@ Add to `~/.codebuddy/settings.json`:
 }
 ```
 
-Restart CodeBuddy Code.
+重启 CodeBuddy Code。
 
-## Configuration
+---
 
-Edit `~/.codebuddy/plugins/codebuddy-hud/config.json`:
+## 配置
+
+编辑 `~/.codebuddy/plugins/codebuddy-hud/config.json`：
 
 ```json
 {
@@ -102,71 +133,124 @@ Edit `~/.codebuddy/plugins/codebuddy-hud/config.json`:
 }
 ```
 
-### Display Options
+### 显示选项
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `model` | boolean | `true` | Show model name |
-| `project` | boolean | `true` | Show project path |
-| `projectDepth` | number | `1` | Path depth (1-3) |
-| `git` | boolean | `false` | Show git branch + status |
-| `version` | boolean | `false` | Show CodeBuddy Code version |
-| `cost` | boolean | `false` | Show session cost |
-| `duration` | boolean | `false` | Show session duration |
-| `diff` | boolean | `false` | Show code changes (+/-) |
-| `tools` | boolean | `false` | Show tool call statistics |
-| `toolsMaxVisible` | number | `4` | Max tools to show (0 = all) |
-| `toolNameMaxLength` | number | `0` | Tool name truncation length (0 = no limit) |
-| `agents` | boolean | `false` | Show agent statistics |
-| `tasks` | boolean | `false` | Show task progress |
-| `contextUsage` | boolean | `true` | Show context window progress bar |
-| `contextValues` | boolean | `false` | Show token values in context bar |
-| `showSpeed` | boolean | `false` | Show output speed (tok/s) |
-| `showSessionTokens` | boolean | `false` | Show session token stats |
+| 选项 | 类型 | 默认值 | 说明 |
+|---|---|---|---|
+| `model` | boolean | `true` | 模型名称 |
+| `project` | boolean | `true` | 项目路径 |
+| `projectDepth` | number | `1` | 路径深度（1-3） |
+| `git` | boolean | `false` | Git 分支 + 状态 |
+| `version` | boolean | `false` | CodeBuddy Code 版本 |
+| `cost` | boolean | `false` | 会话费用 |
+| `duration` | boolean | `false` | 会话时长 |
+| `diff` | boolean | `false` | 代码变更（+/-行数） |
+| `tools` | boolean | `false` | 工具调用统计 |
+| `toolsMaxVisible` | number | `4` | 最多显示几个工具（0 = 全部） |
+| `toolNameMaxLength` | number | `0` | 工具名截断长度（0 = 不截断） |
+| `agents` | boolean | `false` | Agent 调用统计 |
+| `tasks` | boolean | `false` | 任务进度 |
+| `contextUsage` | boolean | `true` | 上下文窗口进度条 |
+| `contextValues` | boolean | `false` | 进度条旁显示 token 数 |
+| `showSpeed` | boolean | `false` | 输出速度（tok/s） |
+| `showSessionTokens` | boolean | `false` | 会话 token 统计 |
 
-### Color Options
+### 颜色选项
 
-Colors support named colors (`red`, `green`, `yellow`, `blue`, `magenta`, `cyan`, `dim`), 256-color indices (0-255), and hex strings (`#FF5500`).
+支持命名颜色（`red`、`green`、`yellow`、`blue`、`magenta`、`cyan`、`dim`）、256 色索引（0-255）、HEX 字符串（`#FF5500`）。
 
-| Option | Default | Description |
-|--------|---------|-------------|
-| `model` | `"cyan"` | Model name color |
-| `project` | `"yellow"` | Project path color |
-| `git` | `"magenta"` | Git prefix/suffix color `git:( )` |
-| `gitBranch` | `"cyan"` | Git branch name color |
-| `label` | `"dim"` | Label color (tok, duration, speed) |
-| `contextWarning` | `70` | Context % warning threshold (yellow) |
-| `contextCritical` | `85` | Context % critical threshold (red) |
-| `barFilled` | `"█"` | Progress bar filled character |
-| `barEmpty` | `"░"` | Progress bar empty character |
+| 选项 | 默认值 | 说明 |
+|---|---|---|
+| `model` | `"cyan"` | 模型名称颜色 |
+| `project` | `"yellow"` | 项目路径颜色 |
+| `git` | `"magenta"` | Git 前后缀颜色 `git:( )` |
+| `gitBranch` | `"cyan"` | Git 分支名颜色 |
+| `label` | `"dim"` | 标签颜色（tok、时长、速度） |
+| `contextWarning` | `70` | 上下文使用率警告阈值（变黄） |
+| `contextCritical` | `85` | 上下文使用率严重阈值（变红） |
+| `barFilled` | `"█"` | 进度条填充字符 |
+| `barEmpty` | `"░"` | 进度条空白字符 |
 
-## Development
+---
+
+## 开发
 
 ```bash
-# Install dependencies
+# 安装依赖
 npm install
 
-# Build
+# 编译
 npm run build
 
-# Watch mode
+# 监听模式
 npm run dev
 
-# Run tests
+# 运行测试
 npm test
 ```
 
-## Compatibility
+---
 
-- **CodeBuddy Code** — Full support (including `function_call_result` transcript format)
-- **Claude Code** — Compatible (supports Anthropic `tool_use` transcript format)
+## 仓库结构
 
-## Credits
+```
+codebuddy-hud/
+├── src/
+│   ├── index.ts              # 主入口
+│   ├── stdin.ts              # stdin 读取
+│   ├── transcript.ts         # transcript 解析（双格式）
+│   ├── config.ts             # 配置加载
+│   ├── git.ts                # Git 状态（并行）
+│   ├── types.ts              # 类型定义
+│   ├── render/
+│   │   ├── index.ts          # 渲染主逻辑
+│   │   ├── stats.ts          # 统计信息（tok/时长/速度）
+│   │   ├── activity.ts       # 工具统计渲染
+│   │   ├── colors.ts         # 颜色函数
+│   │   ├── identity.ts       # 身份行渲染
+│   │   ├── icons.ts          # 图标
+│   │   └── width.ts          # 终端宽度
+│   └── utils/
+│       └── format.ts         # 格式化工具
+├── tests/                    # 131 个测试
+│   ├── activity.test.ts
+│   ├── config.test.ts
+│   ├── format.test.ts
+│   ├── git.test.ts
+│   ├── render.test.ts
+│   ├── stats.test.ts
+│   ├── stdin.test.ts
+│   └── transcript.test.ts
+├── skills/                   # CodeBuddy Code Skills
+│   ├── codebuddy-hud-setup/
+│   └── codebuddy-hud-configure/
+├── package.json
+├── tsconfig.json
+├── LICENSE
+└── README.md
+```
 
-- **Original code**: [tyanxie/t-code-agent-plugins](https://github.com/tyanxie/t-code-agent-plugins)
-- **Color/format inspiration**: [jarrodwatts/claude-hud](https://github.com/jarrodwatts/claude-hud)
-- **CodeBuddy Code format support**: Added `function_call_result` parsing for CodeBuddy Code compatibility
+---
 
-## License
+## 兼容性
 
-[MIT](LICENSE)
+| 平台 | 支持 | 说明 |
+|---|---|---|
+| **CodeBuddy Code** | ✅ 完整支持 | 原生 `function_call_result` transcript 格式 |
+| **Claude Code** | ✅ 兼容 | 支持 Anthropic `tool_use` transcript 格式 |
+
+---
+
+## 致谢
+
+| 项目 | 说明 |
+|---|---|
+| [t-code-agent-plugins (tyanxie)](https://github.com/tyanxie/t-code-agent-plugins) | 本项目基于 tyanxie 的 codebuddy-hud 原始代码 |
+| [claude-hud (jarrodwatts)](https://github.com/jarrodwatts/claude-hud) | 配色方案和渲染格式参考 |
+| [CodeBuddy Code](https://cnb.cool/codebuddy/codebuddy-code) | CodeBuddy Code CLI 工具 |
+
+---
+
+## 许可证
+
+[MIT](LICENSE) — 可自由使用、修改、分发，包括商业用途。
