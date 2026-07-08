@@ -42,6 +42,11 @@ Kimi K2.6 is an open-source native multimodal Agent model by Moonshot AI, design
 <td width="180"><a href="https://www.bigmodel.cn/glm-coding?ic=MR7BVITFAY"><img src="assets/partners/logos/glm.png" alt="GLM" width="150"></a></td>
 <td>Zhipu GLM Coding Plan — China's top coding LLM, 20+ mainstream tools supported, unbeatable value.<a href="https://www.bigmodel.cn/glm-coding?ic=MR7BVITFAY">Join now</a></td>
 </tr>
+
+<tr>
+<td width="180"><a href="https://opencode.ai/go?ref=GVX7W8XST0"><img src="assets/partners/logos/opencode.png" alt="OpenCode" width="150"></a></td>
+<td>OpenCode — Get ¥35 API credit on registration. Everyone can register to claim.<a href="https://opencode.ai/go?ref=GVX7W8XST0">Register</a>（invite code: GVX7W8XST0）</td>
+</tr>
 </table>
 
 </details>
