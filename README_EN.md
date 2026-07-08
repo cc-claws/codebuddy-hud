@@ -1,42 +1,57 @@
-# codebuddy-hud
+<div align="center">
 
-English | [简体中文](README.md)
+English | [中文](README.md)
+
+# codebuddy-hud
 
 **A HUD-style status line for CodeBuddy Code — real-time model, context, git, tool stats, token usage**
 
 Compatible with both CodeBuddy Code and Claude Code transcript formats, colors aligned with claude-hud.
 
-```
-/plugin marketplace add cc-claws/codebuddy-hud
-```
+[![npm](https://img.shields.io/npm/v/codebuddy-hud)](https://www.npmjs.com/package/codebuddy-hud)
+[![GitHub stars](https://img.shields.io/github/stars/cc-claws/codebuddy-hud?style=social)](https://github.com/cc-claws/codebuddy-hud/stargazers)
+[![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
+[![tests](https://img.shields.io/badge/tests-131%20passing-brightgreen?style=flat-square)](tests)
+
+<p align="center"><code>/plugin marketplace add cc-claws/codebuddy-hud</code></p>
 
 [Why codebuddy-hud](#why-codebuddy-hud) · [Features](#features) · [Installation](#installation) · [Configuration](#configuration) · [Credits](#credits)
 
----
+</div>
 
 ## ❤️Sponsor
 
 > [Want to appear here?](mailto:wismyzhizi2018@gmail.com)
 
----
+<details open>
+<summary>Click to collapse</summary>
 
 [![Kimi K2.6](assets/partners/logos/kimi.png)](https://platform.moonshot.cn/console?aff=cc-code)
-Kimi K2.6 is an open-source native multimodal Agent model by Moonshot AI, designed for long-horizon programming, design-driven coding, and group task orchestration. Supports frontend, DevOps, performance optimization, full-stack engineering. [Register](https://platform.moonshot.cn/console?aff=cc-code)
+
+Kimi K2.6 is an open-source native multimodal Agent model by Moonshot AI, designed for long-horizon programming, design-driven coding, and group task orchestration. Supports frontend, DevOps, performance optimization, full-stack engineering.[Register](https://platform.moonshot.cn/console?aff=cc-code)
 
 ---
 
-[![Xiaomi MiMo](assets/partners/logos/mimo.png)](https://platform.xiaomimimo.com?ref=JBEYTF)
-Xiaomi's top model MiMo V2.5 — register with invite code: both parties get ¥10 API credit + 10% off first order. Invite code: JBEYTF. [Register](https://platform.xiaomimimo.com?ref=JBEYTF)（auto-filled · credit valid 40 days）
+<table>
+<tr>
+<td width="180"><a href="https://platform.xiaomimimo.com?ref=JBEYTF"><img src="assets/partners/logos/mimo.png" alt="Xiaomi MiMo" width="150"></a></td>
+<td>Xiaomi's top model MiMo V2.5 — register with invite code: both parties get ¥10 API credit + 10% off first order. Invite code: JBEYTF.<a href="https://platform.xiaomimimo.com?ref=JBEYTF">Register</a>（auto-filled · credit valid 40 days）</td>
+</tr>
 
-[![GLM](assets/partners/logos/glm.png)](https://www.bigmodel.cn/glm-coding?ic=MR7BVITFAY)
-Zhipu GLM Coding Plan — China's top coding LLM, 20+ mainstream tools supported, unbeatable value. [Join now](https://www.bigmodel.cn/glm-coding?ic=MR7BVITFAY)
+<tr>
+<td width="180"><a href="https://www.bigmodel.cn/glm-coding?ic=MR7BVITFAY"><img src="assets/partners/logos/glm.png" alt="GLM" width="150"></a></td>
+<td>Zhipu GLM Coding Plan — China's top coding LLM, 20+ mainstream tools supported, unbeatable value.<a href="https://www.bigmodel.cn/glm-coding?ic=MR7BVITFAY">Join now</a></td>
+</tr>
+</table>
+
+</details>
 
 ---
 
 ## Why codebuddy-hud?
 
 | Feature | claude-hud | t-code-agent-plugins | codebuddy-hud |
-|---|---|---|---|
+|---------|-----------|---------------------|---------------|
 | CodeBuddy Code format | ❌ Not supported | ❌ Not supported | ✅ Native `function_call_result` |
 | Claude Code format | ✅ Supported | ✅ Supported | ✅ `tool_use` supported |
 | Tool stats | Last 20 only | Last 20 only | ✅ Full session cumulative |
@@ -52,7 +67,7 @@ Zhipu GLM Coding Plan — China's top coding LLM, 20+ mainstream tools supported
 ## Features
 
 | Feature | Description |
-|---|---|
+|---------|-------------|
 | **Dual format support** | Both CodeBuddy Code `function_call_result` and Claude Code `tool_use` transcripts |
 | **Real-time tool stats** | Cumulative session tool call counts (`✓ Bash ×102 \| ✓ Read ×79 \| ...`) |
 | **Running tools** | Live indicator for in-progress tools (`◐ Bash`) |
@@ -157,7 +172,7 @@ Edit `~/.codebuddy/plugins/codebuddy-hud/config.json`:
 ### Display Options
 
 | Option | Type | Default | Description |
-|---|---|---|---|
+|--------|------|---------|-------------|
 | `model` | boolean | `true` | Model name |
 | `project` | boolean | `true` | Project path |
 | `projectDepth` | number | `1` | Path depth (1-3) |
@@ -181,7 +196,7 @@ Edit `~/.codebuddy/plugins/codebuddy-hud/config.json`:
 Supports named colors (`red`, `green`, `yellow`, `blue`, `magenta`, `cyan`, `dim`), 256-color indices (0-255), HEX strings (`#FF5500`).
 
 | Option | Default | Description |
-|---|---|---|
+|--------|---------|-------------|
 | `model` | `"cyan"` | Model name color |
 | `project` | `"yellow"` | Project path color |
 | `git` | `"magenta"` | Git prefix/suffix color `git:( )` |
@@ -234,17 +249,7 @@ codebuddy-hud/
 │   └── utils/
 │       └── format.ts         # Formatting utilities
 ├── tests/                    # 131 tests
-│   ├── activity.test.ts
-│   ├── config.test.ts
-│   ├── format.test.ts
-│   ├── git.test.ts
-│   ├── render.test.ts
-│   ├── stats.test.ts
-│   ├── stdin.test.ts
-│   └── transcript.test.ts
 ├── skills/                   # CodeBuddy Code Skills
-│   ├── codebuddy-hud-setup/
-│   └── codebuddy-hud-configure/
 ├── package.json
 ├── tsconfig.json
 ├── LICENSE
@@ -256,7 +261,7 @@ codebuddy-hud/
 ## Compatibility
 
 | Platform | Support | Notes |
-|---|---|---|
+|----------|---------|-------|
 | **CodeBuddy Code** | ✅ Full support | Native `function_call_result` transcript format |
 | **Claude Code** | ✅ Compatible | Supports Anthropic `tool_use` transcript format |
 
@@ -265,7 +270,7 @@ codebuddy-hud/
 ## Credits
 
 | Project | Description |
-|---|---|
+|---------|-------------|
 | [t-code-agent-plugins (tyanxie)](https://github.com/tyanxie/t-code-agent-plugins) | Based on tyanxie's original codebuddy-hud |
 | [claude-hud (jarrodwatts)](https://github.com/jarrodwatts/claude-hud) | Color scheme and rendering format reference |
 | [CodeBuddy Code](https://cnb.cool/codebuddy/codebuddy-code) | CodeBuddy Code CLI tool |
