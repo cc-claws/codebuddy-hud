@@ -34,7 +34,7 @@ Kimi K2.6 is an open-source native multimodal Agent model by Moonshot AI, design
 
 <table>
 <tr>
-<td width="180"><a href="https://platform.xiaomimimo.com?ref=JBEYTF"><img src="assets/partners/logos/mimo.png" alt="Xiaomi MiMo" width="150"></a></td>
+<td width="180"><a href="https://platform.xiaomimimo.com?ref=JBEYTF"><img src="assets/partners/logos/mimo.jpg" alt="Xiaomi MiMo" width="150"></a></td>
 <td>Xiaomi's top model MiMo V2.5 — register with invite code: both parties get ¥10 API credit + 10% off first order. Invite code: JBEYTF.<a href="https://platform.xiaomimimo.com?ref=JBEYTF">Register</a>（auto-filled · credit valid 40 days）</td>
 </tr>
 
